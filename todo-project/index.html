@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My To-Do List</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+   <div class="todo-container">
+
+    <h1>TaskFlow</h1>
+    <p class="subtitle">A simple productivity app built with HTML, CSS & JavaScript</p>
+
+    <div class="input-area">
+        <input 
+            type="text" 
+            id="task-input" 
+            placeholder="Enter a task..."
+        >
+
+        <button id="add-btn">Add</button>
+    </div>
+
+    <div class="task-info">
+        <span id="task-count">0 tasks remaining</span>
+
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <p id="progress-text">0% completed</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">
+            All
+        </button>
+
+        <button class="filter-btn" data-filter="active">
+            Active
+        </button>
+
+        <button class="filter-btn" data-filter="completed">
+            Completed
+        </button>
+    </div>
+
+    <button id="clear-completed">
+        Clear Completed
+    </button>
+
+    <p id="empty-message">
+        No tasks yet. Add your first task! 🚀
+    </p>
+
+    <ul id="task-list"></ul>
+
+</div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

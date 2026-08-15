@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #000000;
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+}
+
+.todo-container {
+    width: 90%;
+    max-width: 500px;
+
+    padding: 30px;
+
+    background: #1e293b;
+
+    border-radius: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+#task-input {
+    flex: 1;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+#add-btn {
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background: #22d3ee;
+}
+
+#task-list {
+    list-style: none;
+    margin-top: 25px;
+}
+
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    background: #000000;
+
+    border-radius: 10px;
+}
+
+.delete-btn {
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+.task-info {
+    margin-top: 20px;
+    color: #94a3b8;
+    text-align: center;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.filter-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #334155;
+    color: white;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: #22d3ee;
+    color: #0f172a;
+}
+#empty-message {
+    text-align: center;
+    color: #64748b;
+    margin-top: 25px;
+    font-size: 14px;
+}
+#clear-completed {
+    display: block;
+    margin: 0 auto 20px;
+
+    padding: 8px 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #ef4444;
+    color: white;
+
+    cursor: pointer;
+}
+.progress-container {
+    width: 80%;
+    height: 10px;
+    background: #1e293b;
+    border-radius: 10px;
+    margin: 15px auto 5px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #22d3ee;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+#progress-text {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-top: 8px;
+}
+li.completed {
+    opacity: 0.55;
+    transform: scale(0.98);
+}
+
+li.completed span {
+    text-decoration: line-through;
+}
+
+#task-list li {
+    animation: taskAppear 0.3s ease;
+}
+
+@keyframes taskAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.subtitle {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 25px;
+}
