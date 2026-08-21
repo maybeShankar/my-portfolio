@@ -27,12 +27,6 @@ function displayTasks() {
 
     let visibleTasks = tasks;
 
-    if (visibleTasks.length === 0) {
-    emptyMessage.style.display = "block";
-} else {
-    emptyMessage.style.display = "none";
-}
-
     if (currentFilter === "active") {
 
         visibleTasks = tasks.filter(function (task) {
@@ -49,6 +43,11 @@ function displayTasks() {
 
     }
 
+    if (visibleTasks.length === 0) {
+        emptyMessage.style.display = "block";
+    } else {
+        emptyMessage.style.display = "none";
+    }
 
     visibleTasks.forEach(function (taskData) {
 
@@ -58,10 +57,15 @@ function displayTasks() {
             task.classList.add("completed");
         }
 
-        task.innerHTML = `
-            <span>${taskData.text}</span>
-            <button class="delete-btn">🗑️</button>
-        `;
+        const taskText = document.createElement("span");
+        taskText.textContent = taskData.text;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-btn";
+        deleteButton.type = "button";
+        deleteButton.textContent = "🗑️";
+
+        task.append(taskText, deleteButton);
 
         taskList.appendChild(task);
 
@@ -76,8 +80,6 @@ function displayTasks() {
 
         });
 
-
-        const deleteButton = task.querySelector(".delete-btn");
 
         deleteButton.addEventListener("click", function (event) {
 
