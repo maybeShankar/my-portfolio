@@ -761,3 +761,212 @@ footer {
 .light-mode .project-link {
     color: #075985;
 }
+
+/* Featured project polish */
+.projects .project-card {
+    position: relative;
+    display: flex;
+    min-height: 350px;
+    padding: 30px;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(2, 6, 23, 0.28);
+}
+
+.projects .project-card::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 4px;
+    content: "";
+    background: linear-gradient(90deg, #22d3ee, #818cf8);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.projects .project-card:hover::before {
+    transform: scaleX(1);
+}
+
+.projects .project-card h3 {
+    margin: 14px 0 10px;
+}
+
+.projects .project-card .project-link {
+    width: fit-content;
+    margin-top: auto;
+    padding: 11px 16px;
+    border: 1px solid #22d3ee;
+    border-radius: 9px;
+    color: #22d3ee;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.projects .project-card .project-link:hover {
+    background: #22d3ee;
+    color: #0f172a;
+    transform: translateX(4px);
+}
+
+.projects .project-card:last-child {
+    background: linear-gradient(145deg, #111827, #172554);
+}
+
+.light-mode .projects .project-card .project-link {
+    color: #075985;
+    border-color: #075985;
+}
+
+.light-mode .projects .project-card .project-link:hover {
+    background: #075985;
+    color: #ffffff;
+}
+
+/* Projects page: responsive layout and richer project cards */
+.projects-page {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.12), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(129, 140, 248, 0.12), transparent 28%);
+}
+
+.projects-page .projects-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 1000px;
+    align-items: stretch;
+}
+
+.projects-page .project-card {
+    position: relative;
+    display: flex;
+    min-height: 330px;
+    flex-direction: column;
+    border-color: rgba(34, 211, 238, 0.22);
+    box-shadow: 0 18px 40px rgba(2, 6, 23, 0.28);
+}
+
+.projects-page .project-card::before {
+    position: absolute;
+    top: 0;
+    right: 22px;
+    left: 22px;
+    height: 3px;
+    border-radius: 0 0 999px 999px;
+    content: "";
+    background: linear-gradient(90deg, #22d3ee, #818cf8);
+}
+
+.projects-page .project-card h2 {
+    font-size: 28px;
+}
+
+.projects-page .project-links,
+.projects-page .project-buttons {
+    margin-top: auto;
+}
+
+.projects-page .project-links a,
+.projects-page .project-buttons a {
+    padding: 11px 18px;
+    border: 1px solid #22d3ee;
+    border-radius: 9px;
+    color: #22d3ee;
+}
+
+.projects-page .project-links a:hover,
+.projects-page .project-buttons a:hover {
+    background: #22d3ee;
+    color: #0f172a;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.38);
+    text-decoration: none;
+}
+
+.light-mode .projects-page {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.16), transparent 30%),
+        #f8fafc;
+}
+
+@media (max-width: 700px) {
+    .projects-page .projects-container {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-page .project-card {
+        min-height: 0;
+    }
+}
+
+/* Portfolio identity and professional profile links */
+.hero-role {
+    margin: 0 0 16px;
+    color: #22d3ee;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.hero-buttons {
+    display: flex;
+    max-width: 760px;
+    margin: 35px auto 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.hero-buttons .btn {
+    margin: 0;
+}
+
+.social-btn {
+    border: 1px solid rgba(34, 211, 238, 0.55);
+    background: rgba(34, 211, 238, 0.1);
+    color: #dffcff;
+}
+
+.social-btn:hover {
+    background: #22d3ee;
+    color: #0f172a;
+}
+
+.resume-soon {
+    border: 1px dashed rgba(148, 163, 184, 0.65);
+    background: transparent;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.light-mode .hero-role {
+    color: #075985;
+}
+
+.light-mode .social-btn {
+    border-color: #075985;
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.light-mode .social-btn:hover {
+    background: #075985;
+    color: #ffffff;
+}
+
+@media (max-width: 520px) {
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+.project-image {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    object-position: center;
+    background: #020617;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    display: block;
+}
