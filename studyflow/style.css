@@ -115,12 +115,12 @@ body {
 
   margin: 0 auto;
 
-  padding: 48px 0 60px;
+  padding: 20px 0 24px;
 }
 
 .welcome {
-  margin-bottom: 40px;
-  padding-bottom: 30px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(38, 50, 68, 0.4);
 }
 
@@ -138,14 +138,14 @@ body {
 }
 
 .welcome h1 {
-  font-size: clamp(38px, 6vw, 70px);
+  font-size: clamp(30px, 3.5vw, 46px);
 
-  line-height: 1.1;
+  line-height: 1.05;
 
   font-weight: 800;
   letter-spacing: -1px;
 
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   color: #fff;
 }
 
@@ -1583,22 +1583,23 @@ body.light .stat-card h2 {
   align-self: start;
 }
 
-/* Desktop: Make streak card more compact and centered */
+/* Desktop: Keep streak card compact */
 @media (min-width: 801px) {
   .streak-card {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 18px 20px;
-  }
-  
-  .streak-content {
     max-width: 100%;
-    padding: 8px 4px;
+    margin: 0;
+    padding: 10px 14px;
   }
-  
+
+  .streak-content {
+    padding: 6px 4px;
+    gap: 3px;
+    max-width: 100%;
+  }
+
   .streak-card .card-header {
-    margin-bottom: 8px;
-    padding-bottom: 8px;
+    margin-bottom: 4px;
+    padding-bottom: 4px;
   }
 }
 
