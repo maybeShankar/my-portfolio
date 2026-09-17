@@ -4,6 +4,8 @@ StudyFlow is a student productivity and study management dashboard built using *
 
 It helps students organize their subjects, assignments, study sessions, notes, goals, and productivity in one place.
 
+## Features
+
 ## ✨ Features
 
 ### 📖 Subject Management
