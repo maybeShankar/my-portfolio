@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>StudyFlow | Student Productivity Dashboard</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#080b12" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  </head>
+
+  <body>
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <!-- HEADER -->
+    <header class="header">
+      <div class="logo">StudyFlow</div>
+
+      <div class="header-actions">
+        <button id="install-btn" type="button" aria-label="Install StudyFlow" title="Install StudyFlow">📲</button>
+        <button id="settings-toggle" aria-label="Open settings">⚙️</button>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main id="main-content" class="container">
+      <!-- WELCOME -->
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">STUDENT PRODUCTIVITY</p>
+
+          <h1>
+            Study smarter.<br />
+            Get more done.
+          </h1>
+
+          <p class="welcome-text">
+            Organize your subjects, assignments and study sessions in one simple
+            dashboard.
+          </p>
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="stats">
+        <div class="stat-card">
+          <span>📚</span>
+
+          <div>
+            <p>Subjects</p>
+            <h2 id="subject-count">0</h2>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <span>✅</span>
+
+          <div>
+            <p>Completed</p>
+            <h2 id="completed-count">0</h2>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <span>📝</span>
+
+          <div>
+            <p>Total Tasks</p>
+            <h2 id="task-count">0</h2>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <span>📊</span>
+
+          <div>
+            <p>Progress</p>
+            <h2 id="progress-percent">0%</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD GRID -->
+      <section class="dashboard-grid">
+        <!-- SUBJECTS -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">LEARNING</p>
+              <h2>My Subjects</h2>
+            </div>
+          </div>
+
+          <form id="subject-form">
+            <input
+              type="text"
+              id="subject-input"
+              placeholder="Enter subject..."
+              required
+            />
+
+            <button type="submit">Add</button>
+          </form>
+
+          <div id="subject-list" class="subject-list">
+            <p class="empty-message">No subjects added yet.</p>
+          </div>
+        </div>
+
+        <!-- TASKS -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">PRODUCTIVITY</p>
+              <h2>Assignments & Tasks</h2>
+            </div>
+          </div>
+
+          <form id="task-form">
+            <input
+              type="text"
+              id="task-input"
+              placeholder="What needs to be done?"
+              required
+            />
+
+            <select id="task-subject">
+              <option value="">Select subject</option>
+            </select>
+
+            <select id="task-priority">
+              <option value="low">🟢 Low</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="high">🔴 High</option>
+            </select>
+
+            <input type="date" id="task-deadline" />
+
+            <button type="submit">Add Task</button>
+          </form>
+
+          <div class="task-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+
+            <button class="filter-btn" data-filter="active">Active</button>
+
+            <button class="filter-btn" data-filter="completed">
+              Completed
+            </button>
+          </div>
+
+          <div id="task-list" class="task-list">
+            <p class="empty-message">No tasks yet.</p>
+          </div>
+        </div>
+
+        <!-- STUDY TIMER -->
+        <div class="card timer-card">
+          <p class="card-label">FOCUS SESSION</p>
+
+          <h2>Study Timer</h2>
+
+          <div id="timer">25:00</div>
+
+          <div class="timer-preset">
+            <label for="timer-preset">Session</label>
+
+            <select id="timer-preset">
+              <option value="20">20 seconds — Test</option>
+              <option value="1500" selected>25 min — Pomodoro</option>
+              <option value="2700">45 min — Deep Focus</option>
+              <option value="3600">60 min — Study Session</option>
+              <option value="5400">90 min — Deep Work</option>
+            </select>
+          </div>
+
+          <div class="timer-subject">
+            <label for="timer-subject">Study Subject</label>
+            <select id="timer-subject">
+              <option value="">Select subject</option>
+            </select>
+          </div>
+
+          <div class="timer-controls">
+            <button id="start-timer">Start</button>
+
+            <button id="pause-timer">Pause</button>
+
+            <button id="reset-timer">Reset</button>
+          </div>
+
+          <div class="timer-motivation">
+            <div class="motivation-quote">
+              Learn today.&nbsp;Upgrade tomorrow.&nbsp;Change everything.
+            </div>
+
+            <div class="motivation-tags">
+              <span class="motivation-tag">FOCUS</span>
+              <span class="motivation-tag">LEARN</span>
+              <span class="motivation-tag">GROW</span>
+              <span class="motivation-tag">SUCCEED</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOCUS MONITOR -->
+        <div class="card focus-card">
+          <p class="card-label">FOCUS MODE</p>
+
+          <h2>👁️ Focus Monitor</h2>
+
+          <div class="camera-container">
+            <video id="focus-camera" autoplay muted playsinline></video>
+
+            <div id="camera-placeholder" class="camera-placeholder">
+              📷 Camera is off
+            </div>
+          </div>
+
+          <div id="focus-status" class="focus-status">⚪ Monitor is off</div>
+
+          <div class="focus-stats">
+            <div class="focus-stat">
+              <span>⏱️</span>
+              <small>Focus Time</small>
+              <strong id="focus-time">00:00</strong>
+            </div>
+
+            <div class="focus-stat">
+              <span>😴</span>
+              <small>Eye Warnings</small>
+              <strong id="eye-warnings">0</strong>
+            </div>
+
+            <div class="focus-stat">
+              <span>👤</span>
+              <small>Face Lost</small>
+              <strong id="face-lost">0</strong>
+            </div>
+          </div>
+
+          <div class="focus-score">
+            <span>🎯 Focus Score</span>
+            <strong id="focus-score">100%</strong>
+          </div>
+
+          <div class="focus-controls">
+            <button id="start-focus" type="button">Start Monitor</button>
+
+            <button id="stop-focus" type="button">Stop</button>
+          </div>
+        </div>
+
+        <!-- STUDY HISTORY -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">PROGRESS</p>
+              <h2>📊 Study History</h2>
+            </div>
+          </div>
+
+          <div class="history-summary">
+            <div class="history-stat">
+              <span>Total Study Time</span>
+              <strong id="total-study-time">0 min</strong>
+            </div>
+
+            <div class="history-stat">
+              <span>Average Focus Score</span>
+              <strong id="average-focus-score">0%</strong>
+            </div>
+          </div>
+
+          <div id="study-history" class="study-history">
+            <p class="empty-message">No study sessions yet.</p>
+          </div>
+        </div>
+
+        <!-- STUDY STREAK -->
+        <div class="card streak-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">STUDY STREAK</p>
+              <h2>🔥 Study Streak</h2>
+            </div>
+          </div>
+          <div class="streak-content">
+            <div class="streak-main">
+              <span class="streak-fire">🔥</span>
+              <div class="streak-number">
+                <strong id="streak-current">0</strong>
+                <span class="streak-label">days in a row</span>
+              </div>
+            </div>
+            <div class="streak-best">
+              <span class="streak-best-label">🏆 Best</span>
+              <strong id="streak-best">0</strong>
+              <span class="streak-label">days</span>
+            </div>
+            <p id="streak-message" class="streak-message">
+              No study records yet. Start your first session today!
+            </p>
+          </div>
+        </div>
+
+        <!-- 7 DAY ANALYTICS -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">YOUR WEEK</p>
+              <h2>📈 Study Analytics</h2>
+            </div>
+          </div>
+
+          <div class="weekly-summary">
+            <div>
+              <span>Total This Week</span>
+              <strong id="weekly-total">0 min</strong>
+            </div>
+
+            <div>
+              <span>Average Focus</span>
+              <strong id="weekly-focus">0%</strong>
+            </div>
+          </div>
+
+          <div id="weekly-chart" class="weekly-chart"></div>
+        </div>
+
+        <!-- ACHIEVEMENTS -->
+        <div class="card achievements-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">MILESTONES</p>
+              <h2>🏆 Achievements</h2>
+            </div>
+            <span id="achievement-count" class="achievement-count">0/6</span>
+          </div>
+          <div id="achievements-list" class="achievements-list"></div>
+        </div>
+
+        <!-- DAILY STUDY GOAL -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">DAILY TARGET</p>
+              <h2>🎯 Today's Study Goal</h2>
+            </div>
+          </div>
+
+          <div class="goal-settings">
+            <label for="daily-goal-select"> Daily Target </label>
+
+            <select id="daily-goal-select">
+              <option value="1800">30 Minutes</option>
+              <option value="3600">1 Hour</option>
+              <option value="7200" selected>2 Hours</option>
+              <option value="10800">3 Hours</option>
+              <option value="14400">4 Hours</option>
+            </select>
+          </div>
+
+          <div class="goal-top">
+            <div>
+              <span>Today's Progress</span>
+
+              <strong id="daily-goal-time"> 0 min / 2h </strong>
+            </div>
+
+            <strong id="daily-goal-percent"> 0% </strong>
+          </div>
+
+          <div class="goal-progress">
+            <div id="daily-goal-bar" class="goal-progress-fill"></div>
+          </div>
+
+          <p id="daily-goal-message" class="goal-message">2 hours remaining</p>
+        </div>
+
+        </div>
+
+        <!-- STUDY PLANNER -->
+        <div class="card planner-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">PLAN YOUR DAY</p>
+              <h2>📅 Study Planner</h2>
+            </div>
+          </div>
+
+          <form id="planner-form" class="planner-form">
+            <input type="text" id="planner-topic" placeholder="What do you want to study?" required />
+            <select id="planner-subject"><option value="">Select subject</option></select>
+            <input type="date" id="planner-date" required />
+            <input type="time" id="planner-time" required />
+            <select id="planner-duration">
+              <option value="20">20 minutes</option>
+              <option value="25" selected>25 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60">1 hour</option>
+              <option value="90">90 minutes</option>
+            </select>
+            <select id="planner-priority">
+              <option value="low">🟢 Low</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="high">🔴 High</option>
+            </select>
+            <button type="submit">➕ Add Plan</button>
+          </form>
+
+          <div class="planner-summary">
+            <span>📅 Today: <strong id="planner-today-count">0</strong></span>
+            <span>📌 Upcoming: <strong id="planner-upcoming-count">0</strong></span>
+          </div>
+
+          <div id="planner-list" class="planner-list">
+            <p class="empty-message">No study plans yet.</p>
+          </div>
+        </div>
+
+        <!-- STUDY CALENDAR -->
+        <div class="card calendar-card">
+          <div class="card-header calendar-header">
+            <div>
+              <p class="card-label">PLAN AT A GLANCE</p>
+              <h2>🗓️ Study Calendar</h2>
+            </div>
+            <div class="calendar-controls">
+              <button type="button" id="calendar-prev" class="calendar-nav-btn" aria-label="Previous month">◀</button>
+              <button type="button" id="calendar-today" class="calendar-today-btn">Today</button>
+              <button type="button" id="calendar-next" class="calendar-nav-btn" aria-label="Next month">▶</button>
+            </div>
+          </div>
+
+          <div id="calendar-title" class="calendar-title"></div>
+          <div class="calendar-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+            <span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div id="study-calendar" class="study-calendar"></div>
+
+          <div class="calendar-selected">
+            <h3 id="calendar-selected-title">Select a date</h3>
+            <div id="calendar-selected-plans" class="calendar-selected-plans">
+              <p class="empty-message">Click a date to see its study plans.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SMART STUDY RECOMMENDATIONS -->
+        <div class="card smart-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">AI-STYLE GUIDANCE</p>
+              <h2>🤖 Smart Study Recommendations</h2>
+            </div>
+            <button type="button" id="refresh-recommendations" class="small-action">↻ Refresh</button>
+          </div>
+          <div id="study-recommendations" class="recommendation-list">
+            <p class="empty-message">Add subjects or tasks to get a recommendation.</p>
+          </div>
+        </div>
+
+        <!-- SUBJECT PERFORMANCE -->
+        <div class="card performance-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">SUBJECT INSIGHTS</p>
+              <h2>📊 Subject Performance</h2>
+            </div>
+          </div>
+          <div id="subject-performance" class="performance-grid"></div>
+          <div id="subject-highlights" class="insight-strip"></div>
+        </div>
+
+        <!-- SMART STREAK & CONSISTENCY -->
+        <div class="card consistency-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">HABIT INSIGHTS</p>
+              <h2>🔥 Smart Streak &amp; Consistency</h2>
+            </div>
+          </div>
+          <div class="smart-metrics">
+            <div><span>Current Streak</span><strong id="smart-current-streak">0 days</strong></div>
+            <div><span>Best Streak</span><strong id="smart-best-streak">0 days</strong></div>
+            <div><span>Consistency</span><strong id="smart-consistency">0%</strong></div>
+            <div><span>Missed Days</span><strong id="smart-missed-days">0</strong></div>
+          </div>
+          <p id="consistency-message" class="insight-message">Start studying to build your consistency.</p>
+        </div>
+
+        <!-- EXAM / DEADLINE MODE -->
+        <div class="card exam-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">IMPORTANT DATES</p>
+              <h2>🎯 Exam / Deadline Mode</h2>
+            </div>
+          </div>
+          <form id="exam-form" class="exam-form">
+            <input type="text" id="exam-title" placeholder="Exam or deadline name" required />
+            <input type="date" id="exam-date" required />
+            <select id="exam-subject">
+              <option value="">All subjects</option>
+            </select>
+            <button type="submit">➕ Add Exam</button>
+          </form>
+          <div id="exam-list" class="exam-list">
+            <p class="empty-message">No exams or deadlines added.</p>
+          </div>
+        </div>
+
+        <!-- SMART DAILY PLAN -->
+        <div class="card daily-plan-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">TODAY'S ROADMAP</p>
+              <h2>🧠 Smart Daily Plan</h2>
+            </div>
+            <button type="button" id="generate-daily-plan" class="small-action">⚡ Generate</button>
+          </div>
+          <div id="smart-daily-plan" class="daily-plan-list">
+            <p class="empty-message">Generate your recommended schedule for today.</p>
+          </div>
+        </div>
+
+        <!-- ADVANCED DASHBOARD -->
+        <div class="card advanced-dashboard-card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">PRODUCTIVITY ANALYTICS</p>
+              <h2>📈 Advanced Dashboard</h2>
+            </div>
+          </div>
+          <div class="advanced-summary" id="advanced-summary"></div>
+          <div class="trend-chart-wrap">
+            <h3>Study Time — Last 7 Days</h3>
+            <div id="advanced-week-chart" class="bar-chart"></div>
+          </div>
+          <div class="trend-chart-wrap">
+            <h3>Subject-wise Progress</h3>
+            <div id="advanced-subject-chart" class="bar-chart subject-bars"></div>
+          </div>
+
+          <div class="monthly-comparison" id="advanced-monthly">
+            <div class="monthly-pill">
+              <div class="month-label">This Month</div>
+              <div class="month-value" id="advanced-this-month">0</div>
+            </div>
+            <div class="monthly-pill">
+              <div class="month-label">Last Month</div>
+              <div class="month-value" id="advanced-last-month">0</div>
+              <div class="month-change" id="advanced-month-change"></div>
+            </div>
+          </div>
+
+          <div class="productivity-trend">
+            <h3>📈 Productivity Trend — Last 7 Days</h3>
+            <div id="advanced-trend-chart" class="trend-chart"></div>
+            <div id="advanced-trend-scores" class="trend-score-line"></div>
+          </div>
+        </div>
+
+        <!-- NOTES -->
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <p class="card-label">QUICK NOTES</p>
+              <h2>My Notes</h2>
+            </div>
+          </div>
+
+          <textarea
+            id="notes"
+            placeholder="Write something you want to remember..."
+          ></textarea>
+
+          <p class="save-status" id="save-status">
+            Notes are saved automatically.
+          </p>
+        </div>
+      </section>
+
+      <!-- PROGRESS -->
+      <section class="card progress-card">
+        <div class="card-header">
+          <div>
+            <p class="card-label">YOUR JOURNEY</p>
+            <h2>Study Progress</h2>
+          </div>
+
+          <strong id="progress-text"> 0% </strong>
+        </div>
+
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+
+        <p class="progress-message" id="progress-message">
+          Start completing tasks to track your progress.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>StudyFlow — Built with HTML, CSS & JavaScript</p>
+    </footer>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settings-modal" class="settings-overlay" aria-hidden="true">
+      <div
+        class="settings-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-title"
+      >
+        <div class="settings-header">
+          <div>
+            <p class="card-label">PREFERENCES</p>
+            <h2 id="settings-title">⚙️ StudyFlow Settings</h2>
+          </div>
+          <button
+            id="settings-close"
+            class="settings-close"
+            type="button"
+            aria-label="Close settings"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="settings-section">
+          <p class="settings-section-title">Focus Monitor</p>
+
+          <div class="setting-row">
+            <div>
+              <strong>🔔 Warning sound</strong>
+              <span>Play a sound when an eye warning is triggered.</span>
+            </div>
+            <label class="switch">
+              <input id="setting-warning-sound" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>👀 Eye sensitivity</strong>
+              <span>Choose how easily closed eyes are detected.</span>
+            </div>
+            <select id="setting-eye-sensitivity">
+              <option value="0.18">Relaxed — easier to trigger</option>
+              <option value="0.20">Normal — recommended</option>
+              <option value="0.22">Sensitive — quicker detection</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>⏱️ Warning delay</strong>
+              <span>How long your eyes must stay closed before warning.</span>
+            </div>
+            <select id="setting-warning-delay">
+              <option value="1500">1.5 seconds</option>
+              <option value="2000">2 seconds</option>
+              <option value="3000">3 seconds</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>🔁 Warning cooldown</strong>
+              <span>Minimum time between repeated eye warnings.</span>
+            </div>
+            <select id="setting-alert-cooldown">
+              <option value="3000">3 seconds</option>
+              <option value="5000">5 seconds</option>
+              <option value="10000">10 seconds</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>📷 Auto-start monitor</strong>
+              <span
+                >Start Focus Monitor automatically when the timer starts.</span
+              >
+            </div>
+            <label class="switch">
+              <input id="setting-auto-monitor" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <p class="settings-section-title">Notifications</p>
+          <div class="setting-row notification-setting-row">
+            <div>
+              <strong>🔔 Study notifications</strong>
+              <span id="notification-status">Get a browser alert when important study events happen.</span>
+            </div>
+            <button id="enable-notifications" class="setting-action" type="button">🔔 Enable Notifications</button>
+          </div>
+          <p id="permission-denied-message" class="permission-denied-message">🔕 Notifications blocked — enable in browser settings to receive study alerts.</p>
+        </div>
+
+        <div class="settings-section">
+          <p class="settings-section-title">Study</p>
+
+          <div class="setting-row">
+            <div>
+              <strong>🎯 Daily study target</strong>
+              <span>Change the target used by Today's Study Goal.</span>
+            </div>
+            <select id="setting-daily-goal">
+              <option value="1800">30 Minutes</option>
+              <option value="3600">1 Hour</option>
+              <option value="7200">2 Hours</option>
+              <option value="10800">3 Hours</option>
+              <option value="14400">4 Hours</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <strong>🌙 Appearance</strong>
+              <span>Use the existing StudyFlow theme switch.</span>
+            </div>
+            <button id="setting-theme" class="setting-action" type="button">
+              Toggle Theme
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <p class="settings-section-title">Data & Backup</p>
+          <div class="backup-intro"><span class="backup-icon">🛡️</span><div><strong>Keep your progress safe</strong><span>Export your StudyFlow data before clearing browser data or moving to another device.</span></div></div>
+          <div class="backup-actions">
+            <button id="export-backup" class="backup-button primary-backup" type="button">💾 Export Backup</button>
+            <button id="import-backup" class="backup-button" type="button">📥 Import Backup</button>
+            <input id="backup-file-input" type="file" accept=".json,application/json" hidden>
+          </div>
+          <div class="backup-actions backup-secondary-actions"><button id="export-history-csv" class="backup-button" type="button">📊 Export History CSV</button></div>
+          <div id="backup-status" class="backup-status" aria-live="polite">No backup exported yet.</div>
+        </div>
+
+        <div class="settings-danger">
+          <div>
+            <strong>🗑️ Reset study data</strong>
+            <span
+              >Delete subjects, tasks, notes, history, streaks and
+              progress.</span
+            >
+          </div>
+          <button id="reset-study-data" class="danger-button" type="button">
+            Reset Data
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Complete Modal -->
+    <div id="session-modal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-icon">🎉</div>
+        <h3>Session Complete!</h3>
+
+        <div class="modal-stats">
+          <div class="modal-stat">
+            <span class="stat-label">⏱️ Session</span>
+            <strong id="modal-duration" class="stat-value">--:--</strong>
+          </div>
+          <div class="modal-stat">
+            <span class="stat-label">📚 Type</span>
+            <strong id="modal-type" class="stat-value">--</strong>
+          </div>
+          <div class="modal-stat">
+            <span class="stat-label">🎯 Focus Score</span>
+            <strong id="modal-score" class="stat-value">--%</strong>
+          </div>
+          <div class="modal-stat">
+            <span class="stat-label">😴 Eye Warnings</span>
+            <strong id="modal-eye-warnings" class="stat-value">0</strong>
+          </div>
+          <div class="modal-stat">
+            <span class="stat-label">👤 Face Lost</span>
+            <strong id="modal-face-lost" class="stat-value">0</strong>
+          </div>
+        </div>
+
+        <p id="modal-message" class="modal-message">
+          Great work — you completed your study session.
+        </p>
+
+        <button id="modal-close-btn" class="modal-btn">Awesome!</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
