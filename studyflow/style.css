@@ -878,8 +878,25 @@ body.light .week-day span {
   color: #64748b;
 }
 
-body.light .goal-message {
-  color: #64748b;
+body.light .welcome h1 {
+  color: #0f172a;
+}
+
+body.light .achievement-icon {
+  color: #0f172a;
+}
+
+body.light .recommendation-action {
+  color: #0f172a;
+  background: var(--primary);
+}
+
+body.light .card h2 {
+  color: #0f172a;
+}
+
+body.light .stat-card h2 {
+  color: #0f172a;
 }
 
 /* RESPONSIVE */
